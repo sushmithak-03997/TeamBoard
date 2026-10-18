@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:16
+    container_name: teamboard_postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - teamboard_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  teamboard_postgres_data:
